@@ -1,1 +1,508 @@
-*{box-sizing:border-box;margin:0;padding:0}body{font-family:Arial,Helvetica,sans-serif;background:#f4f7f4;color:#173b2a}header{background:#123d29;color:#fff;text-align:center;padding:30px 15px}.logo{font-size:32px;font-weight:bold}.subtitle{margin-top:7px;opacity:.9}.container{max-width:1000px;margin:auto;padding:18px}.section-title{margin:25px 0 15px;font-size:24px}.produtos-scroll{display:flex;gap:15px;overflow-x:auto;padding:5px 4px 20px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}.produtos-scroll::-webkit-scrollbar{height:7px}.produtos-scroll::-webkit-scrollbar-thumb{background:#176b45;border-radius:10px}.produto{flex:0 0 250px;background:#fff;border-radius:15px;overflow:hidden;box-shadow:0 3px 12px rgba(0,0,0,.08);scroll-snap-align:start;padding-bottom:18px;display:flex;flex-direction:column}.produto-imagem,.sem-imagem{width:100%;height:220px}.produto-imagem{object-fit:cover;display:block}.sem-imagem{background:#e8eee9;display:flex;align-items:center;justify-content:center;font-size:70px;color:#176b45}.produto h3{font-size:18px;padding:15px 15px 5px;min-height:58px}.preco{font-size:21px;font-weight:bold;padding:5px 15px 15px}.produto button{margin:0 15px;border:none;border-radius:9px;padding:13px;background:#176b45;color:#fff;font-size:16px;font-weight:bold;cursor:pointer}.produto button:hover{background:#125638}.box{background:#fff;border-radius:14px;padding:20px;margin-top:25px;box-shadow:0 3px 12px rgba(0,0,0,.07)}.box h2{margin-bottom:10px}#listaCarrinho{margin-top:15px}.vazio{text-align:center;color:#777;padding:15px}.item{display:flex;justify-content:space-between;align-items:center;gap:10px;border-bottom:1px solid #ddd;padding:13px 0}.item-info{flex:1}.item-nome{font-weight:bold}.item-preco{color:#66736c;font-size:14px;margin-top:4px}.controles{display:flex;align-items:center;gap:8px}.btn-qtd{width:34px;height:34px;border:none;border-radius:7px;background:#e3ebe5;color:#123d29;font-size:20px;font-weight:bold;cursor:pointer}.qtd{min-width:22px;text-align:center;font-weight:bold}.totais{margin-top:18px;border-top:2px solid #eee;padding-top:15px}.linha{display:flex;justify-content:space-between;margin:9px 0}.total{font-size:23px;font-weight:bold;margin-top:16px;color:#123d29}label{display:block;font-weight:bold;margin-top:15px;margin-bottom:6px}input,select,textarea{width:100%;padding:13px;border:1px solid #ccd5cf;border-radius:9px;font-size:16px;background:#fff;color:#173b2a;outline:none}input:focus,select:focus,textarea:focus{border-color:#176b45}textarea{min-height:90px;resize:vertical}.btn-whatsapp{width:100%;border:none;border-radius:10px;padding:16px;margin-top:22px;color:#fff;font-size:18px;font-weight:bold}.btn-whatsapp:disabled{background:#9da6a0;cursor:not-allowed;opacity:.75}.btn-whatsapp:not(:disabled){background:#25d366;cursor:pointer}footer{text-align:center;padding:30px 15px;color:#66736c;font-size:14px}@media(max-width:500px){.logo{font-size:27px}.container{padding:12px}.section-title{font-size:22px}.produto{flex:0 0 240px}.produto-imagem,.sem-imagem{height:215px}}
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+
+  background: #f4f7f4;
+
+  color: #173b2a;
+}
+
+
+/* =========================
+   CABEÇALHO
+========================= */
+
+header {
+  background: #123d29;
+
+  color: white;
+
+  text-align: center;
+
+  padding: 30px 15px;
+}
+
+
+.logo {
+  font-size: 32px;
+
+  font-weight: bold;
+}
+
+
+.subtitle {
+  margin-top: 7px;
+
+  opacity: 0.9;
+}
+
+
+/* =========================
+   CONTAINER
+========================= */
+
+.container {
+  max-width: 900px;
+
+  margin: auto;
+
+  padding: 18px;
+}
+
+
+.section-title {
+  margin: 25px 0 15px;
+
+  font-size: 24px;
+}
+
+
+/* =========================
+   PRODUTOS HORIZONTAL
+========================= */
+
+.produtos-scroll {
+
+  display: flex;
+
+  gap: 14px;
+
+  overflow-x: auto;
+
+  padding: 5px 4px 18px;
+
+  scroll-snap-type: x mandatory;
+
+  -webkit-overflow-scrolling: touch;
+
+  scrollbar-width: thin;
+}
+
+
+.produtos-scroll::-webkit-scrollbar {
+  height: 6px;
+}
+
+
+.produtos-scroll::-webkit-scrollbar-thumb {
+
+  background: #176b45;
+
+  border-radius: 10px;
+}
+
+
+.produto {
+
+  flex: 0 0 240px;
+
+  scroll-snap-align: start;
+
+  background: white;
+
+  border-radius: 14px;
+
+  padding: 18px;
+
+  box-shadow:
+    0 3px 12px rgba(0,0,0,.07);
+
+  display: flex;
+
+  flex-direction: column;
+}
+
+
+.produto h3 {
+
+  min-height: 44px;
+
+  margin-bottom: 10px;
+
+  font-size: 18px;
+}
+
+
+.preco {
+
+  font-size: 20px;
+
+  font-weight: bold;
+
+  margin-bottom: 15px;
+}
+
+
+.produto button {
+
+  width: 100%;
+
+  border: none;
+
+  border-radius: 9px;
+
+  padding: 13px;
+
+  background: #176b45;
+
+  color: white;
+
+  font-size: 16px;
+
+  font-weight: bold;
+
+  cursor: pointer;
+
+  margin-top: auto;
+
+  transition: .2s;
+}
+
+
+.produto button:hover {
+
+  background: #125638;
+}
+
+
+.produto button:active {
+
+  transform: scale(.97);
+}
+
+
+/* =========================
+   CAIXAS
+========================= */
+
+.box {
+
+  background: white;
+
+  border-radius: 14px;
+
+  padding: 20px;
+
+  margin-top: 22px;
+
+  box-shadow:
+    0 3px 12px rgba(0,0,0,.07);
+}
+
+
+.box h2 {
+
+  margin-bottom: 10px;
+}
+
+
+/* =========================
+   CARRINHO
+========================= */
+
+#listaCarrinho {
+
+  margin-top: 15px;
+}
+
+
+.item {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  gap: 10px;
+
+  border-bottom: 1px solid #ddd;
+
+  padding: 13px 0;
+}
+
+
+.item-info {
+
+  flex: 1;
+}
+
+
+.item-nome {
+
+  font-weight: bold;
+}
+
+
+.item-preco {
+
+  color: #66736c;
+
+  font-size: 14px;
+
+  margin-top: 4px;
+}
+
+
+.controles {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+}
+
+
+.btn-qtd {
+
+  width: 34px;
+
+  height: 34px;
+
+  border: none;
+
+  border-radius: 7px;
+
+  background: #e3ebe5;
+
+  color: #123d29;
+
+  font-size: 20px;
+
+  font-weight: bold;
+
+  cursor: pointer;
+}
+
+
+.qtd {
+
+  min-width: 22px;
+
+  text-align: center;
+
+  font-weight: bold;
+}
+
+
+.vazio {
+
+  text-align: center;
+
+  color: #777;
+
+  padding: 15px;
+}
+
+
+/* =========================
+   TOTAIS
+========================= */
+
+.totais {
+
+  margin-top: 18px;
+
+  border-top: 2px solid #eee;
+
+  padding-top: 15px;
+}
+
+
+.linha {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  margin: 9px 0;
+}
+
+
+.total {
+
+  font-size: 23px;
+
+  font-weight: bold;
+
+  margin-top: 16px;
+
+  color: #123d29;
+}
+
+
+/* =========================
+   FORMULÁRIO
+========================= */
+
+label {
+
+  display: block;
+
+  font-weight: bold;
+
+  margin-top: 15px;
+
+  margin-bottom: 6px;
+}
+
+
+input,
+select,
+textarea {
+
+  width: 100%;
+
+  padding: 13px;
+
+  border: 1px solid #ccd5cf;
+
+  border-radius: 9px;
+
+  font-size: 16px;
+
+  background: white;
+
+  color: #173b2a;
+
+  outline: none;
+}
+
+
+input:focus,
+select:focus,
+textarea:focus {
+
+  border-color: #176b45;
+
+  box-shadow:
+    0 0 0 2px rgba(23,107,69,.1);
+}
+
+
+textarea {
+
+  min-height: 90px;
+
+  resize: vertical;
+}
+
+
+/* =========================
+   BOTÃO WHATSAPP
+========================= */
+
+.btn-whatsapp {
+
+  width: 100%;
+
+  border: none;
+
+  border-radius: 10px;
+
+  padding: 16px;
+
+  margin-top: 22px;
+
+  color: white;
+
+  font-size: 18px;
+
+  font-weight: bold;
+
+  transition: .2s;
+}
+
+
+/* BLOQUEADO */
+
+.btn-whatsapp:disabled {
+
+  background: #9da6a0;
+
+  cursor: not-allowed;
+
+  opacity: .75;
+}
+
+
+/* LIBERADO */
+
+.btn-whatsapp:not(:disabled) {
+
+  background: #25d366;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 4px 12px rgba(37,211,102,.25);
+}
+
+
+.btn-whatsapp:not(:disabled):hover {
+
+  background: #1ebe5d;
+}
+
+
+.btn-whatsapp:not(:disabled):active {
+
+  transform: scale(.98);
+}
+
+
+/* =========================
+   RODAPÉ
+========================= */
+
+footer {
+
+  text-align: center;
+
+  padding: 30px 15px;
+
+  color: #66736c;
+
+  font-size: 14px;
+}
+
+
+/* =========================
+   CELULAR
+========================= */
+
+@media (max-width: 500px) {
+
+  .logo {
+
+    font-size: 27px;
+  }
+
+
+  .container {
+
+    padding: 12px;
+  }
+
+
+  .section-title {
+
+    font-size: 22px;
+  }
+
+
+  .produto {
+
+    flex: 0 0 235px;
+
+    padding: 16px;
+  }
+
+}
