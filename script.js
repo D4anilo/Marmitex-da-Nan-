@@ -1,9 +1,612 @@
-let carrinho=[];
-function adicionar(nome,preco){const produto=carrinho.find(item=>item.nome===nome);if(produto)produto.quantidade++;else carrinho.push({nome,preco,quantidade:1});atualizarCarrinho()}
-function alterarQuantidade(index,valor){if(!carrinho[index])return;carrinho[index].quantidade+=valor;if(carrinho[index].quantidade<=0)carrinho.splice(index,1);atualizarCarrinho()}
-function dinheiro(valor){return Number(valor).toFixed(2).replace('.',',')}
-function obterTaxa(){const bairro=document.getElementById('bairro');return !bairro||bairro.value===''?0:Number(bairro.value)}
-function atualizarCarrinho(){const lista=document.getElementById('listaCarrinho');lista.innerHTML='';let subtotal=0;if(carrinho.length===0)lista.innerHTML='<div class="vazio">Seu carrinho está vazio.</div>';carrinho.forEach((item,index)=>{const valor=item.preco*item.quantidade;subtotal+=valor;const div=document.createElement('div');div.className='item';div.innerHTML=`<div class="item-info"><div class="item-nome">${item.nome}</div><div class="item-preco">R$ ${dinheiro(item.preco)} cada</div></div><div class="controles"><button class="btn-qtd" onclick="alterarQuantidade(${index},-1)">−</button><span class="qtd">${item.quantidade}</span><button class="btn-qtd" onclick="alterarQuantidade(${index},1)">+</button></div>`;lista.appendChild(div)});const taxa=obterTaxa();document.getElementById('subtotal').innerText=dinheiro(subtotal);document.getElementById('taxa').innerText=dinheiro(taxa);document.getElementById('total').innerText=dinheiro(subtotal+taxa);verificarFormulario()}
-function verificarFormulario(){const nome=document.getElementById('nome').value.trim(),telefone=document.getElementById('telefone').value.trim(),endereco=document.getElementById('endereco').value.trim(),bairro=document.getElementById('bairro').value,pagamento=document.getElementById('pagamento').value;const completo=carrinho.length>0&&nome&&telefone&&endereco&&bairro&&pagamento;const botao=document.getElementById('btnWhatsApp');botao.disabled=!completo;botao.innerHTML=completo?'📱 Enviar Pedido pelo WhatsApp':'🔒 Preencha os dados para enviar'}
-function enviarWhatsApp(){if(carrinho.length===0){alert('Adicione pelo menos um produto.');return}const nome=document.getElementById('nome').value.trim(),telefone=document.getElementById('telefone').value.trim(),endereco=document.getElementById('endereco').value.trim(),bairroElement=document.getElementById('bairro'),pagamento=document.getElementById('pagamento').value,observacoes=document.getElementById('observacoes').value.trim();if(!nome||!telefone||!endereco||!bairroElement.value||!pagamento){alert('Preencha todos os campos obrigatórios.');verificarFormulario();return}const bairro=bairroElement.options[bairroElement.selectedIndex].text;let subtotal=0,produtos='';carrinho.forEach(item=>{const valor=item.preco*item.quantidade;subtotal+=valor;produtos+=`• ${item.quantidade}x ${item.nome} — R$ ${dinheiro(valor)}\n`});const taxa=obterTaxa(),total=subtotal+taxa;const mensagem=`🍱 *MARMITEX DA NANÁ*\n\n━━━━━━━━━━━━━━━━\n\n👤 *CLIENTE*\n\nNome: ${nome}\nTelefone: ${telefone}\n\n━━━━━━━━━━━━━━━━\n\n📍 *ENTREGA*\n\nEndereço: ${endereco}\nBairro: ${bairro}\n\n━━━━━━━━━━━━━━━━\n\n🍽️ *PEDIDO*\n\n${produtos}━━━━━━━━━━━━━━━━\n\n💰 Subtotal: R$ ${dinheiro(subtotal)}\n🛵 Entrega: R$ ${dinheiro(taxa)}\n💵 *TOTAL: R$ ${dinheiro(total)}*\n\n━━━━━━━━━━━━━━━━\n\n💳 *PAGAMENTO*\n\n${pagamento}\n\n━━━━━━━━━━━━━━━━\n\n📝 *OBSERVAÇÕES*\n\n${observacoes||'Nenhuma'}\n\n━━━━━━━━━━━━━━━━\n\nObrigado por pedir com a\n*Marmitex da Naná!* ❤️`;window.open('https://wa.me/5512996785101?text='+encodeURIComponent(mensagem),'_blank')}
-document.addEventListener('input',verificarFormulario);document.addEventListener('change',()=>{verificarFormulario();atualizarCarrinho()});document.addEventListener('DOMContentLoaded',()=>{atualizarCarrinho();verificarFormulario()});
+/* =========================
+   CARRINHO
+========================= */
+
+let carrinho = [];
+
+
+/* =========================
+   ADICIONAR PRODUTO
+========================= */
+
+function adicionar(nome, preco) {
+
+  const produto =
+    carrinho.find(
+      item => item.nome === nome
+    );
+
+
+  if (produto) {
+
+    produto.quantidade++;
+
+  } else {
+
+    carrinho.push({
+
+      nome: nome,
+
+      preco: preco,
+
+      quantidade: 1
+
+    });
+
+  }
+
+
+  atualizarCarrinho();
+}
+
+
+/* =========================
+   ALTERAR QUANTIDADE
+========================= */
+
+function alterarQuantidade(index, valor) {
+
+  if (!carrinho[index]) {
+
+    return;
+
+  }
+
+
+  carrinho[index].quantidade += valor;
+
+
+  if (
+    carrinho[index].quantidade <= 0
+  ) {
+
+    carrinho.splice(index, 1);
+
+  }
+
+
+  atualizarCarrinho();
+}
+
+
+/* =========================
+   FORMATAR DINHEIRO
+========================= */
+
+function dinheiro(valor) {
+
+  return Number(valor)
+
+    .toFixed(2)
+
+    .replace(".", ",");
+
+}
+
+
+/* =========================
+   TAXA DE ENTREGA
+========================= */
+
+function obterTaxa() {
+
+  const bairro =
+    document.getElementById("bairro");
+
+
+  if (
+    !bairro ||
+    bairro.value === ""
+  ) {
+
+    return 0;
+
+  }
+
+
+  return Number(bairro.value);
+}
+
+
+/* =========================
+   ATUALIZAR CARRINHO
+========================= */
+
+function atualizarCarrinho() {
+
+  const lista =
+    document.getElementById(
+      "listaCarrinho"
+    );
+
+
+  lista.innerHTML = "";
+
+
+  let subtotal = 0;
+
+
+  /* CARRINHO VAZIO */
+
+  if (carrinho.length === 0) {
+
+    lista.innerHTML = `
+
+      <div class="vazio">
+
+        Seu carrinho está vazio.
+
+      </div>
+
+    `;
+
+  }
+
+
+  /* PRODUTOS */
+
+  carrinho.forEach(
+    function(item, index) {
+
+
+      const valor =
+        item.preco *
+        item.quantidade;
+
+
+      subtotal += valor;
+
+
+      const div =
+        document.createElement(
+          "div"
+        );
+
+
+      div.className = "item";
+
+
+      div.innerHTML = `
+
+        <div class="item-info">
+
+          <div class="item-nome">
+
+            ${item.nome}
+
+          </div>
+
+
+          <div class="item-preco">
+
+            R$ ${dinheiro(
+              item.preco
+            )}
+
+            cada
+
+          </div>
+
+        </div>
+
+
+        <div class="controles">
+
+          <button
+
+            class="btn-qtd"
+
+            onclick="
+              alterarQuantidade(
+                ${index},
+                -1
+              )
+            "
+
+          >
+            −
+          </button>
+
+
+          <span class="qtd">
+
+            ${item.quantidade}
+
+          </span>
+
+
+          <button
+
+            class="btn-qtd"
+
+            onclick="
+              alterarQuantidade(
+                ${index},
+                1
+              )
+            "
+
+          >
+            +
+          </button>
+
+        </div>
+
+      `;
+
+
+      lista.appendChild(div);
+
+    }
+  );
+
+
+  /* VALORES */
+
+  const taxa =
+    obterTaxa();
+
+
+  const total =
+    subtotal + taxa;
+
+
+  document.getElementById(
+    "subtotal"
+  ).innerText =
+    dinheiro(subtotal);
+
+
+  document.getElementById(
+    "taxa"
+  ).innerText =
+    dinheiro(taxa);
+
+
+  document.getElementById(
+    "total"
+  ).innerText =
+    dinheiro(total);
+
+
+  verificarFormulario();
+}
+
+
+/* =========================
+   VERIFICAR FORMULÁRIO
+========================= */
+
+function verificarFormulario() {
+
+  const nome =
+    document.getElementById(
+      "nome"
+    ).value.trim();
+
+
+  const telefone =
+    document.getElementById(
+      "telefone"
+    ).value.trim();
+
+
+  const endereco =
+    document.getElementById(
+      "endereco"
+    ).value.trim();
+
+
+  const bairro =
+    document.getElementById(
+      "bairro"
+    ).value;
+
+
+  const pagamento =
+    document.getElementById(
+      "pagamento"
+    ).value;
+
+
+  const tudoPreenchido =
+
+    carrinho.length > 0 &&
+
+    nome !== "" &&
+
+    telefone !== "" &&
+
+    endereco !== "" &&
+
+    bairro !== "" &&
+
+    pagamento !== "";
+
+
+  const botao =
+    document.getElementById(
+      "btnWhatsApp"
+    );
+
+
+  if (tudoPreenchido) {
+
+    botao.disabled = false;
+
+    botao.innerHTML =
+      "📱 Enviar Pedido pelo WhatsApp";
+
+  } else {
+
+    botao.disabled = true;
+
+    botao.innerHTML =
+      "🔒 Preencha os dados para enviar";
+
+  }
+}
+
+
+/* =========================
+   ENVIAR WHATSAPP
+========================= */
+
+function enviarWhatsApp() {
+
+  /* SEGURANÇA */
+
+  if (carrinho.length === 0) {
+
+    alert(
+      "Adicione pelo menos um produto."
+    );
+
+    return;
+  }
+
+
+  const nome =
+    document.getElementById(
+      "nome"
+    ).value.trim();
+
+
+  const telefone =
+    document.getElementById(
+      "telefone"
+    ).value.trim();
+
+
+  const endereco =
+    document.getElementById(
+      "endereco"
+    ).value.trim();
+
+
+  const bairroElement =
+    document.getElementById(
+      "bairro"
+    );
+
+
+  const pagamento =
+    document.getElementById(
+      "pagamento"
+    ).value;
+
+
+  const observacoes =
+    document.getElementById(
+      "observacoes"
+    ).value.trim();
+
+
+  /* VERIFICAÇÃO */
+
+  if (
+
+    !nome ||
+
+    !telefone ||
+
+    !endereco ||
+
+    !bairroElement.value ||
+
+    !pagamento
+
+  ) {
+
+    alert(
+      "Preencha todos os campos obrigatórios."
+    );
+
+    verificarFormulario();
+
+    return;
+  }
+
+
+  /* BAIRRO */
+
+  const bairro =
+    bairroElement.options[
+      bairroElement.selectedIndex
+    ].text;
+
+
+  /* PRODUTOS */
+
+  let subtotal = 0;
+
+  let produtos = "";
+
+
+  carrinho.forEach(
+    function(item) {
+
+
+      const valor =
+        item.preco *
+        item.quantidade;
+
+
+      subtotal += valor;
+
+
+      produtos +=
+
+        `• ${item.quantidade}x ` +
+
+        `${item.nome} ` +
+
+        `— R$ ${dinheiro(
+          valor
+        )}\n`;
+
+    }
+  );
+
+
+  /* VALORES */
+
+  const taxa =
+    obterTaxa();
+
+
+  const total =
+    subtotal + taxa;
+
+
+  /* =========================
+     WHATSAPP DA EMPRESA
+  ========================== */
+
+  const numeroWhatsApp =
+    "5512996785101";
+
+
+  /* =========================
+     MENSAGEM
+  ========================== */
+
+  const mensagem =
+
+`🍱 *MARMITEX DA NANÁ*
+
+━━━━━━━━━━━━━━━━
+
+👤 *CLIENTE*
+
+Nome: ${nome}
+Telefone: ${telefone}
+
+━━━━━━━━━━━━━━━━
+
+📍 *ENTREGA*
+
+Endereço: ${endereco}
+Bairro: ${bairro}
+
+━━━━━━━━━━━━━━━━
+
+🍽️ *PEDIDO*
+
+${produtos}
+━━━━━━━━━━━━━━━━
+
+💰 Subtotal: R$ ${dinheiro(
+  subtotal
+)}
+
+🛵 Entrega: R$ ${dinheiro(
+  taxa
+)}
+
+💵 *TOTAL: R$ ${dinheiro(
+  total
+)}*
+
+━━━━━━━━━━━━━━━━
+
+💳 *PAGAMENTO*
+
+${pagamento}
+
+━━━━━━━━━━━━━━━━
+
+📝 *OBSERVAÇÕES*
+
+${observacoes || "Nenhuma"}
+
+━━━━━━━━━━━━━━━━
+
+Obrigado por pedir com a
+*Marmitex da Naná!* ❤️`;
+
+
+  /* =========================
+     ABRIR WHATSAPP
+  ========================== */
+
+  const url =
+
+    "https://wa.me/" +
+
+    numeroWhatsApp +
+
+    "?text=" +
+
+    encodeURIComponent(
+      mensagem
+    );
+
+
+  window.open(
+    url,
+    "_blank"
+  );
+}
+
+
+/* =========================
+   ATUALIZAÇÃO AUTOMÁTICA
+========================= */
+
+document.addEventListener(
+  "input",
+  function() {
+
+    verificarFormulario();
+
+  }
+);
+
+
+document.addEventListener(
+  "change",
+  function() {
+
+    verificarFormulario();
+
+    atualizarCarrinho();
+
+  }
+);
+
+
+/* =========================
+   INICIAR
+========================= */
+
+document.addEventListener(
+  "DOMContentLoaded",
+  function() {
+
+    atualizarCarrinho();
+
+    verificarFormulario();
+
+  }
+);
