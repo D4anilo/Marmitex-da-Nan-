@@ -1,42 +1,400 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Marmitex da Naná</title><link rel="stylesheet" href="style.css">
-</head>
-<body>
-<header><div class="logo">🍱 Marmitex da Naná</div><div class="subtitle">Comida caseira feita com carinho ❤️</div></header>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>Untitled</title>
+    <link rel="stylesheet" href="./style.css">
+
+  </head>
+    
+  <body>
+  <header>
+  <div class="logo">🍱 Marmitex da Naná</div>
+
+  <div class="subtitle">
+    Comida caseira feita com carinho ❤️
+  </div>
+</header>
+
+
 <main class="container">
-<h2 class="section-title">🍱 Marmitex</h2>
-<div class="produtos-scroll">
-<div class="produto"><img src="imagens/contra-file-grelhado.jpg" alt="Contra Filé Grelhado" class="produto-imagem"><h3>Contra Filé Grelhado</h3><div class="preco">R$ 26,00</div><button onclick="adicionar('Contra Filé Grelhado',26)">+ Adicionar</button></div>
-<div class="produto"><img src="imagens/contra-file-a-cavalo.jpg" alt="Contra Filé a Cavalo" class="produto-imagem"><h3>Contra Filé a Cavalo</h3><div class="preco">R$ 27,00</div><button onclick="adicionar('Contra Filé a Cavalo',27)">+ Adicionar</button></div>
-<div class="produto"><div class="sem-imagem">🍱</div><h3>Contra Filé à Milanesa</h3><div class="preco">R$ 27,00</div><button onclick="adicionar('Contra Filé à Milanesa',27)">+ Adicionar</button></div>
-<div class="produto"><div class="sem-imagem">🍱</div><h3>Contra Filé à Parmegiana</h3><div class="preco">R$ 32,00</div><button onclick="adicionar('Contra Filé à Parmegiana',32)">+ Adicionar</button></div>
-<div class="produto"><div class="sem-imagem">🍱</div><h3>Filé de Frango Grelhado</h3><div class="preco">R$ 22,00</div><button onclick="adicionar('Filé de Frango Grelhado',22)">+ Adicionar</button></div>
-<div class="produto"><div class="sem-imagem">🍱</div><h3>Filé de Frango à Pizzaiolo</h3><div class="preco">R$ 24,00</div><button onclick="adicionar('Filé de Frango à Pizzaiolo',24)">+ Adicionar</button></div>
-<div class="produto"><div class="sem-imagem">🍱</div><h3>Filé de Frango à Milanesa</h3><div class="preco">R$ 24,00</div><button onclick="adicionar('Filé de Frango à Milanesa',24)">+ Adicionar</button></div>
-<div class="produto"><div class="sem-imagem">🍱</div><h3>Filé de Frango à Parmegiana</h3><div class="preco">R$ 28,00</div><button onclick="adicionar('Filé de Frango à Parmegiana',28)">+ Adicionar</button></div>
-<div class="produto"><div class="sem-imagem">🍱</div><h3>Peixe à Parmegiana</h3><div class="preco">R$ 32,00</div><button onclick="adicionar('Peixe à Parmegiana',32)">+ Adicionar</button></div>
-<div class="produto"><div class="sem-imagem">🍱</div><h3>Peixe à Milanesa</h3><div class="preco">R$ 26,00</div><button onclick="adicionar('Peixe à Milanesa',26)">+ Adicionar</button></div>
-<div class="produto"><div class="sem-imagem">🍱</div><h3>Linguiça Toscana</h3><div class="preco">R$ 26,00</div><button onclick="adicionar('Linguiça Toscana',26)">+ Adicionar</button></div>
-<div class="produto"><div class="sem-imagem">🍱</div><h3>Calabresa Acebolada</h3><div class="preco">R$ 20,00</div><button onclick="adicionar('Calabresa Acebolada',20)">+ Adicionar</button></div>
-</div>
-<h2 class="section-title">🥤 Bebidas</h2>
-<div class="produtos-scroll">
-<div class="produto"><div class="sem-imagem bebida">🥤</div><h3>Coca-Cola Lata</h3><div class="preco">R$ 7,00</div><button onclick="adicionar('Coca-Cola Lata',7)">+ Adicionar</button></div>
-<div class="produto"><div class="sem-imagem bebida">🥤</div><h3>Guaraná Lata</h3><div class="preco">R$ 6,00</div><button onclick="adicionar('Guaraná Lata',6)">+ Adicionar</button></div>
-</div>
-<section class="box"><h2>🛒 Seu Pedido</h2><div id="listaCarrinho"><div class="vazio">Seu carrinho está vazio.</div></div><div class="totais"><div class="linha"><span>Subtotal</span><strong>R$ <span id="subtotal">0,00</span></strong></div><div class="linha"><span>Entrega</span><strong>R$ <span id="taxa">0,00</span></strong></div><div class="linha total"><span>Total</span><strong>R$ <span id="total">0,00</span></strong></div></div></section>
-<section class="box"><h2>📋 Dados para entrega</h2>
-<label for="nome">Nome *</label><input id="nome" type="text" placeholder="Seu nome">
-<label for="telefone">Telefone *</label><input id="telefone" type="tel" placeholder="(12) 99999-9999">
-<label for="endereco">Endereço *</label><input id="endereco" type="text" placeholder="Rua, número e complemento">
-<label for="bairro">Bairro *</label><select id="bairro"><option value="">Selecione seu bairro</option><option value="0">Pogorelli — Grátis</option><option value="2">Perequê-Mirim — R$ 2,00</option><option value="2">Jaraguá — R$ 2,00</option><option value="4">Enseada — R$ 4,00</option><option value="3">Travessão — R$ 3,00</option><option value="4">Canto do Mar — R$ 4,00</option><option value="5">Porto Novo — R$ 5,00</option><option value="4">Barranco Alto — R$ 4,00</option></select>
-<label for="pagamento">Forma de pagamento *</label><select id="pagamento"><option value="">Selecione</option><option>Pix</option><option>Dinheiro</option><option>Cartão de Débito</option><option>Cartão de Crédito</option></select>
-<label for="observacoes">Observações</label><textarea id="observacoes" placeholder="Ex.: sem cebola, tocar campainha..."></textarea>
-<button id="btnWhatsApp" class="btn-whatsapp" onclick="enviarWhatsApp()" disabled>🔒 Preencha os dados para enviar</button>
-</section>
-</main><footer><strong>Marmitex da Naná 🍱</strong><br>Comida caseira feita com carinho ❤️</footer>
-<script src="script.js"></script>
-</body></html>
+
+  <!-- =========================
+       MARMITEX
+  ========================== -->
+
+  <h2 class="section-title">
+    🍱 Marmitex
+  </h2>
+
+  <div class="produtos-scroll">
+
+    <div class="produto">
+      <h3>Contra Filé Grelhado</h3>
+      <div class="preco">R$ 26,00</div>
+
+      <button onclick="adicionar('Contra Filé Grelhado', 26)">
+        + Adicionar
+      </button>
+    </div>
+
+
+    <div class="produto">
+      <h3>Contra Filé a Cavalo</h3>
+      <div class="preco">R$ 27,00</div>
+
+      <button onclick="adicionar('Contra Filé a Cavalo', 27)">
+        + Adicionar
+      </button>
+    </div>
+
+
+    <div class="produto">
+      <h3>Contra Filé à Milanesa</h3>
+      <div class="preco">R$ 27,00</div>
+
+      <button onclick="adicionar('Contra Filé à Milanesa', 27)">
+        + Adicionar
+      </button>
+    </div>
+
+
+    <div class="produto">
+      <h3>Contra Filé à Parmegiana</h3>
+      <div class="preco">R$ 32,00</div>
+
+      <button onclick="adicionar('Contra Filé à Parmegiana', 32)">
+        + Adicionar
+      </button>
+    </div>
+
+
+    <div class="produto">
+      <h3>Filé de Frango Grelhado</h3>
+      <div class="preco">R$ 22,00</div>
+
+      <button onclick="adicionar('Filé de Frango Grelhado', 22)">
+        + Adicionar
+      </button>
+    </div>
+
+
+    <div class="produto">
+      <h3>Filé de Frango à Pizzaiolo</h3>
+      <div class="preco">R$ 24,00</div>
+
+      <button onclick="adicionar('Filé de Frango à Pizzaiolo', 24)">
+        + Adicionar
+      </button>
+    </div>
+
+
+    <div class="produto">
+      <h3>Filé de Frango à Milanesa</h3>
+      <div class="preco">R$ 24,00</div>
+
+      <button onclick="adicionar('Filé de Frango à Milanesa', 24)">
+        + Adicionar
+      </button>
+    </div>
+
+
+    <div class="produto">
+      <h3>Filé de Frango à Parmegiana</h3>
+      <div class="preco">R$ 28,00</div>
+
+      <button onclick="adicionar('Filé de Frango à Parmegiana', 28)">
+        + Adicionar
+      </button>
+    </div>
+
+
+    <div class="produto">
+      <h3>Peixe à Parmegiana</h3>
+      <div class="preco">R$ 32,00</div>
+
+      <button onclick="adicionar('Peixe à Parmegiana', 32)">
+        + Adicionar
+      </button>
+    </div>
+
+
+    <div class="produto">
+      <h3>Peixe à Milanesa</h3>
+      <div class="preco">R$ 26,00</div>
+
+      <button onclick="adicionar('Peixe à Milanesa', 26)">
+        + Adicionar
+      </button>
+    </div>
+
+
+    <div class="produto">
+      <h3>Linguiça Toscana</h3>
+      <div class="preco">R$ 26,00</div>
+
+      <button onclick="adicionar('Linguiça Toscana', 26)">
+        + Adicionar
+      </button>
+    </div>
+
+
+    <div class="produto">
+      <h3>Calabresa Acebolada</h3>
+      <div class="preco">R$ 20,00</div>
+
+      <button onclick="adicionar('Calabresa Acebolada', 20)">
+        + Adicionar
+      </button>
+    </div>
+
+  </div>
+
+
+  <!-- =========================
+       BEBIDAS
+  ========================== -->
+
+  <h2 class="section-title">
+    🥤 Bebidas
+  </h2>
+
+  <div class="produtos-scroll">
+
+    <div class="produto">
+      <h3>Coca-Cola Lata</h3>
+      <div class="preco">R$ 7,00</div>
+
+      <button onclick="adicionar('Coca-Cola Lata', 7)">
+        + Adicionar
+      </button>
+    </div>
+
+
+    <div class="produto">
+      <h3>Guaraná Lata</h3>
+      <div class="preco">R$ 6,00</div>
+
+      <button onclick="adicionar('Guaraná Lata', 6)">
+        + Adicionar
+      </button>
+    </div>
+
+  </div>
+
+
+  <!-- =========================
+       CARRINHO
+  ========================== -->
+
+  <section class="box">
+
+    <h2>🛒 Seu Pedido</h2>
+
+    <div id="listaCarrinho">
+
+      <div class="vazio">
+        Seu carrinho está vazio.
+      </div>
+
+    </div>
+
+
+    <div class="totais">
+
+      <div class="linha">
+
+        <span>Subtotal</span>
+
+        <strong>
+          R$ <span id="subtotal">0,00</span>
+        </strong>
+
+      </div>
+
+
+      <div class="linha">
+
+        <span>Entrega</span>
+
+        <strong>
+          R$ <span id="taxa">0,00</span>
+        </strong>
+
+      </div>
+
+
+      <div class="linha total">
+
+        <span>Total</span>
+
+        <strong>
+          R$ <span id="total">0,00</span>
+        </strong>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       DADOS DO CLIENTE
+  ========================== -->
+
+  <section class="box">
+
+    <h2>📋 Dados para entrega</h2>
+
+
+    <label for="nome">
+      Nome *
+    </label>
+
+    <input
+      id="nome"
+      type="text"
+      placeholder="Seu nome"
+    >
+
+
+    <label for="telefone">
+      Telefone *
+    </label>
+
+    <input
+      id="telefone"
+      type="tel"
+      placeholder="(12) 99999-9999"
+    >
+
+
+    <label for="endereco">
+      Endereço *
+    </label>
+
+    <input
+      id="endereco"
+      type="text"
+      placeholder="Rua, número e complemento"
+    >
+
+
+    <label for="bairro">
+      Bairro *
+    </label>
+
+    <select
+      id="bairro"
+    >
+
+      <option value="">
+        Selecione seu bairro
+      </option>
+
+      <option value="0">
+        Pogorelli — Grátis
+      </option>
+
+      <option value="2">
+        Perequê-Mirim — R$ 2,00
+      </option>
+
+      <option value="2">
+        Jaraguá — R$ 2,00
+      </option>
+
+      <option value="4">
+        Enseada — R$ 4,00
+      </option>
+
+      <option value="3">
+        Travessão — R$ 3,00
+      </option>
+
+      <option value="4">
+        Canto do Mar — R$ 4,00
+      </option>
+
+      <option value="5">
+        Porto Novo — R$ 5,00
+      </option>
+
+      <option value="4">
+        Barranco Alto — R$ 4,00
+      </option>
+
+    </select>
+
+
+    <label for="pagamento">
+      Forma de pagamento *
+    </label>
+
+    <select id="pagamento">
+
+      <option value="">
+        Selecione
+      </option>
+
+      <option value="Pix">
+        Pix
+      </option>
+
+      <option value="Dinheiro">
+        Dinheiro
+      </option>
+
+      <option value="Cartão de Débito">
+        Cartão de Débito
+      </option>
+
+      <option value="Cartão de Crédito">
+        Cartão de Crédito
+      </option>
+
+    </select>
+
+
+    <label for="observacoes">
+      Observações
+    </label>
+
+    <textarea
+      id="observacoes"
+      placeholder="Ex.: sem cebola, tocar campainha..."
+    ></textarea>
+
+
+    <button
+      id="btnWhatsApp"
+      class="btn-whatsapp"
+      onclick="enviarWhatsApp()"
+      disabled
+    >
+      🔒 Preencha os dados para enviar
+    </button>
+
+  </section>
+
+</main>
+
+
+<footer>
+
+  <strong>
+    Marmitex da Naná 🍱
+  </strong>
+
+  <br>
+
+  Comida caseira feita com carinho ❤️
+
+</footer>
+    <script  src="./script.js"></script>
+
+  </body>
+  
+</html>
